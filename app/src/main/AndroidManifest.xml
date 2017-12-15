@@ -22,10 +22,6 @@
             </intent-filter>
         </activity>
 
-
-        <activity android:name=".ui.activity.RepositoryListActivity"/>
-        <activity android:name=".ui.activity.RepositoryPrListActivity"/>
-
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="${fabricKey}" />
