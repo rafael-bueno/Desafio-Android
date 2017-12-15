@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import com.rbueno.desafioandroid.R
-import io.kimo.konamicode.KonamiCode
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,8 +11,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState, persistentState)
         setContentView(R.layout.activity_main)
 
-        KonamiCode.Installer(this)
-                .on(this)
-                .install()
+
+       // https://api.github.com/search/repositories?q=language:Java&sort=stars&page=
+//        https://api.github.com/repos/<criador>/<repositório>/pulls
+
+
     }
 }
