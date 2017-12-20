@@ -5,12 +5,12 @@ apply plugin: 'io.fabric'
 
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.1"
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
     defaultConfig {
         applicationId "com.rbueno.desafioandroid"
-        minSdkVersion 19
-        targetSdkVersion 27
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -28,57 +28,42 @@ android {
     }
 }
 
-ext {
-    requestMatcherVersion = "2.1.0"
-    okhttpVersion = "3.6.0"
-    junitVersion = "4.12"
-    hamcrestVersion = "1.3"
-    espressoVersion = "2.2.2"
-    testRulesVersion = "0.5"
-    testRunnerVersion = "0.5"
-    supportVersion = "27.0.2"
-    mirrorVersion = "1.6.1"
-    testButlerVersion = "1.3.0"
-    retrofitVersion = "2.2.0"
-    eventbusVersion = "3.0.0"
-    crashliticsVersion = "2.8.0@aar"
-    kappucinoVersion = "1.1.0"
-    daggerVersion = "2.12"
-}
-
 dependencies {
-    implementation "com.android.support:recyclerview-v7:$supportVersion"
-    implementation "com.android.support:appcompat-v7:$supportVersion"
+    api project(":repository")
 
-    implementation "android.arch.lifecycle:runtime:1.0.3"
-    implementation "android.arch.lifecycle:extensions:1.0.0"
-    annotationProcessor "android.arch.lifecycle:compiler:1.0.0"
+    implementation deps.support.recyclerview
+    implementation deps.support.appcompat
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation deps.arch.lifecycle_runtime
+    implementation deps.arch.lifecycle_extensions
+    implementation deps.arch.paging
+    annotationProcessor deps.arch.lifecycle_compiler
 
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    implementation deps.kotlin.stdlib
 
-    compile "com.google.dagger:dagger:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.converter_gson
+    implementation deps.retrofit.logging_interceptor
 
-    api("com.crashlytics.sdk.android:crashlytics:$crashliticsVersion") {
+    implementation deps.dagger.runtime
+    annotationProcessor deps.dagger.compiler
+
+    api(deps.crashlytics) {
         transitive = true;
     }
 
     //unit test dependencies
-    testImplementation "br.com.concretesolutions:requestmatcher:$requestMatcherVersion"
-    testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
-    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+    testImplementation deps.request_matcher
+    testImplementation deps.hamcrest
+    testImplementation deps.mock_web_server
 
     //instrumented testes dependencies
-    androidTestImplementation "br.com.concretesolutions:requestmatcher:$requestMatcherVersion"
-    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
-    androidTestImplementation "com.android.support.test:rules:$testRulesVersion"
-    androidTestImplementation "com.android.support.test:runner:$testRunnerVersion"
-    androidTestImplementation "com.android.support:support-annotations:$supportVersion"
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion")
-    androidTestImplementation "br.com.concretesolutions:kappuccino:$kappucinoVersion"
+    androidTestImplementation deps.request_matcher
+    androidTestImplementation deps.mock_web_server
+    androidTestImplementation deps.support_test.rules
+    androidTestImplementation deps.support_test.runner
+    androidTestImplementation deps.support.annotations
+    androidTestImplementation deps.support_test.espresso_core
+    androidTestImplementation deps.kappucino
 }
 
