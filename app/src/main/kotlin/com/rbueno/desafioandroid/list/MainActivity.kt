@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState, persistentState)
         setContentView(R.layout.activity_main)
 
+        //ApiService.INSTANCE.repositoryService().
 
        // https://api.github.com/search/repositories?q=language:Java&sort=stars&page=
 //        https://api.github.com/repos/<criador>/<repositório>/pulls
