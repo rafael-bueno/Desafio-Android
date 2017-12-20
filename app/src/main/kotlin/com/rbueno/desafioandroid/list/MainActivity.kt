@@ -1,4 +1,4 @@
-package com.rbueno.desafioandroid.ui.activity
+package com.rbueno.desafioandroid.list
 
 import android.os.Bundle
 import android.os.PersistableBundle
