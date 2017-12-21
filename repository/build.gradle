@@ -33,10 +33,7 @@ dependencies {
     implementation deps.retrofit.runtime
     implementation deps.retrofit.converter_gson
     implementation deps.retrofit.logging_interceptor
-    implementation deps.retrofit.rxjava_adapter
     implementation deps.arch.lifecycle_extensions
-    implementation deps.rx.android
-    implementation deps.rx.java
 
     testImplementation deps.junit
 }

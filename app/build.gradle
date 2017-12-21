@@ -45,9 +45,6 @@ dependencies {
     implementation deps.retrofit.converter_gson
     implementation deps.retrofit.logging_interceptor
 
-    implementation deps.dagger.runtime
-    annotationProcessor deps.dagger.compiler
-
     api(deps.crashlytics) {
         transitive = true;
     }
