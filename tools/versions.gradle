@@ -22,6 +22,7 @@ versions.dagger = "2.12"
 versions.crashlitics = "2.8.0@aar"
 versions.kappucino = "1.1.0"
 versions.paging = "1.0.0-alpha4-1"
+versions.glide = "4.4.0"
 
 //define o array de dependencias
 def deps = [:]
@@ -60,6 +61,11 @@ support_test.rules = "com.android.support.test:rules:$versions.test_rules"
 support_test.runner = "com.android.support.test:runner:$versions.test_runner"
 support_test.espresso_core = "com.android.support.test.espresso:espresso-core:$versions.espresso"
 deps.support_test = support_test
+
+def glide = [:]
+glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide = glide
 
 //other libs
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
