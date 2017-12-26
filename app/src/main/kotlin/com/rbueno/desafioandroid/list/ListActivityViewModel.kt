@@ -12,10 +12,8 @@ import com.rbueno.desafioandroid.repository.GitRepository
 
 
 class ListActivityViewModel : ViewModel() {
-    val repositories: LiveData<PagedList<GitRepository>> =
-            LivePagedListBuilder(ListActivityDataSourceFactory(),
-                    PagedList.Config.Builder().setPageSize(10).setInitialLoadSizeHint(10).build()).build()
-
+    val repositories: LiveData<PagedList<GitRepository>> = LivePagedListBuilder(ListActivityDataSourceFactory(),
+            PagedList.Config.Builder().setPageSize(10).build()).build()
 }
 
 class ListActivityDataSource : PageKeyedDataSource<Int, GitRepository>() {
