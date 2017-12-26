@@ -7,8 +7,12 @@ import android.arch.paging.DataSource
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PageKeyedDataSource
 import android.arch.paging.PagedList
-import android.util.Log
+import com.rbueno.desafioandroid.repository.ApiService
 import com.rbueno.desafioandroid.repository.GitRepository
+import com.rbueno.desafioandroid.repository.GitRepositorySearch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ListActivityViewModel : ViewModel() {
@@ -19,23 +23,42 @@ class ListActivityViewModel : ViewModel() {
 class ListActivityDataSource : PageKeyedDataSource<Int, GitRepository>() {
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, GitRepository>) {
-        Log.d("Load", "initial")
+        ApiService.instance.repositoryService().listRepositoryPerPage(1, params.requestedLoadSize).enqueue(object : Callback<GitRepositorySearch> {
+            override fun onResponse(call: Call<GitRepositorySearch>?, response: Response<GitRepositorySearch>?) {
+                val responseBody = response?.body()
+                responseBody?.let { rep -> callback.onResult(rep.items, 0, rep.totalItems, 1, 2) }
+            }
+
+            override fun onFailure(call: Call<GitRepositorySearch>?, t: Throwable?) {
+                TODO("implementar tratamento de erros") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, GitRepository>) {
-        Log.d("Load", "after")
+        ApiService.instance.repositoryService().listRepositoryPerPage(params.key, params.requestedLoadSize).enqueue(object : Callback<GitRepositorySearch> {
+            override fun onResponse(call: Call<GitRepositorySearch>?, response: Response<GitRepositorySearch>?) {
+                val responseBody = response?.body()
+                val hasNextPage = response?.headers()?.toMultimap()?.get("Link")?.get(0)?.contains("rel=\"next\"")
+                responseBody?.let { rep -> callback.onResult(rep.items, if(hasNextPage!!) params.key + 1 else null) }
+            }
+
+            override fun onFailure(call: Call<GitRepositorySearch>?, t: Throwable?) {
+                TODO("implementar tratamento de erros") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
     }
 
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, GitRepository>) {
-        Log.d("Load", "before")
-    }
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, GitRepository>) {}
 
 
 }
 
 class ListActivityDataSourceFactory : DataSource.Factory<Int, GitRepository> {
 
-    val sourceLiveData = MutableLiveData<ListActivityDataSource>()
+    private val sourceLiveData = MutableLiveData<ListActivityDataSource>()
 
     override fun create(): DataSource<Int, GitRepository> {
         val source = ListActivityDataSource()

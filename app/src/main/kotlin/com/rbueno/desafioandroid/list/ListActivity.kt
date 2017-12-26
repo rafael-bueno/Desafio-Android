@@ -17,7 +17,7 @@ class ListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_list)
         viewModel = ViewModelProviders.of(this).get(ListActivityViewModel::class.java)
         val adapter = MainAdapter()
-        recyclerRepositories.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerRepositories.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerRepositories.adapter = adapter
         viewModel.repositories.observe(this, Observer { list -> adapter.setList(list) })
     }
