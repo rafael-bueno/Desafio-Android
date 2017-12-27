@@ -12,19 +12,19 @@ import com.rbueno.desafioandroid.R
 import com.rbueno.desafioandroid.repository.GitRepository
 import de.hdodenhof.circleimageview.CircleImageView
 
-class ListAdapter : PagedListAdapter<GitRepository, MainHolder>(DIFF) {
-    override fun onBindViewHolder(holder: MainHolder?, position: Int) {
+class ListAdapter : PagedListAdapter<GitRepository, GitRepositoryHolder>(DIFF) {
+    override fun onBindViewHolder(holder: GitRepositoryHolder?, position: Int) {
         holder?.bindView(getItem(position))
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MainHolder {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): GitRepositoryHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.view_repository_item, parent, false)
-        return MainHolder(view)
+        return GitRepositoryHolder(view)
     }
 }
 
 
-class MainHolder(view: View) : RecyclerView.ViewHolder(view) {
+class GitRepositoryHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val textRepository = view.findViewById<TextView>(R.id.textRepositoryName)
     private val textRepositoryDescription = view.findViewById<TextView>(R.id.textRepositoryDescription)
