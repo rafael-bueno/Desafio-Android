@@ -1,14 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:orientation="vertical">
+    android:layout_margin="15dp"
+    android:background="@drawable/ripple_list_effect"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:id="@+id/textRepositoryName"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="teste" />
+        android:layout_marginRight="10dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/imageOwner"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Nome do repositorio" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/textRepositoryDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/textOwnerName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textRepositoryName"
+        tools:text="Descricao do repositorio" />
+
+    <TextView
+        android:id="@+id/textRepositoryForks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@+id/textRepositoryDescription"
+        tools:text="640" />
+
+    <TextView
+        android:id="@+id/textRepositoryStars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageOwner"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintLeft_toRightOf="@+id/textRepositoryForks"
+        app:layout_constraintTop_toBottomOf="@+id/textRepositoryDescription"
+        tools:text="98" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageOwner"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textOwnerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageOwner"
+        tools:text="username" />
+
+</android.support.constraint.ConstraintLayout>

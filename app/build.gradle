@@ -21,6 +21,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            debuggable true
+        }
     }
 
     sourceSets {
@@ -33,6 +37,7 @@ dependencies {
 
     implementation deps.support.recyclerview
     implementation deps.support.appcompat
+    implementation deps.support.constraint_layout
 
     implementation deps.arch.lifecycle_runtime
     implementation deps.arch.lifecycle_extensions
@@ -51,6 +56,8 @@ dependencies {
     api(deps.crashlytics) {
         transitive = true;
     }
+
+    implementation deps.circle_imageview
 
     //unit test dependencies
     testImplementation deps.request_matcher
