@@ -12,19 +12,22 @@ import com.rbueno.desafioandroid.R
 import com.rbueno.desafioandroid.repository.GitRepository
 import de.hdodenhof.circleimageview.CircleImageView
 
-class ListAdapter : PagedListAdapter<GitRepository, GitRepositoryHolder>(DIFF) {
+class ListAdapter(val callbackHandler: ListAdapterOnItemClickHandler) : PagedListAdapter<GitRepository, GitRepositoryHolder>(DIFF) {
     override fun onBindViewHolder(holder: GitRepositoryHolder?, position: Int) {
         holder?.bindView(getItem(position))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): GitRepositoryHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.view_repository_item, parent, false)
-        return GitRepositoryHolder(view)
+        return GitRepositoryHolder(view, callbackHandler)
     }
 }
 
+interface ListAdapterOnItemClickHandler {
+    fun onItemClick(repositoryFullName: String)
+}
 
-class GitRepositoryHolder(view: View) : RecyclerView.ViewHolder(view) {
+class GitRepositoryHolder(view: View, val callbackHandler: ListAdapterOnItemClickHandler) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
     private val textRepository = view.findViewById<TextView>(R.id.textRepositoryName)
     private val textRepositoryDescription = view.findViewById<TextView>(R.id.textRepositoryDescription)
@@ -34,12 +37,34 @@ class GitRepositoryHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val textOwnerName = view.findViewById<TextView>(R.id.textOwnerName)
 
     fun bindView(repository: GitRepository?) {
-        textRepository.text = repository?.repositoryName
-        textRepositoryDescription.text = repository?.repositoryDescription
-        textRepositoryForks.text = repository?.repositoryForksCount.toString()
-        textRepositoryStars.text = repository?.repositoryStarsCount.toString()
-        Glide.with(itemView).load(repository?.owner?.avatarUrl).into(imageOwner)
-        textOwnerName.text = repository?.owner?.ownerLogin
+        if (repository != null) {
+            textRepository.text = repository.repositoryName
+            textRepositoryDescription.text = repository.repositoryDescription
+            textRepositoryForks.text = repository.repositoryForksCount.toString()
+            textRepositoryStars.text = repository.repositoryStarsCount.toString()
+            Glide.with(itemView).load(repository.owner.avatarUrl).into(imageOwner)
+            textOwnerName.text = repository.owner.ownerLogin
+
+            itemView.tag = repository.repositoryUserName
+            itemView.setOnClickListener(this)
+        } else {
+
+            textRepository.text = ""
+            textRepositoryDescription.text =""
+            textRepositoryForks.text = ""
+            textRepositoryStars.text = ""
+
+            /*FiftyShadesOf.with(itemView.context)
+                    .on(textRepository, textRepositoryDescription,
+                            textRepositoryForks, textRepositoryStars, imageOwner, textOwnerName)
+                    .start()*/
+        }
+    }
+
+    override fun onClick(v: View?) {
+        if (v != null) {
+            callbackHandler.onItemClick(v.tag as String)
+        }
     }
 
 }

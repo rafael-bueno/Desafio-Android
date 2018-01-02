@@ -11,5 +11,7 @@ interface RepositoryService {
     fun listRepositoryPerPage(@Query("page") page: Int, @Query("per_page") itemsPerPage: Int): Call<GitRepositorySearch>
 
     @GET("repos/{repository}/pulls")
-    fun listPullRequestPerRepo(@Path("repository") repositoryFullName: String): Call<List<GitRepositoryPullRequest>>
+    fun listPullRequestPerRepo(@Path("repository", encoded = true) repositoryFullName: String,
+                               @Query("page") page: Int, @Query("per_page") itemsPerPage: Int): Call<List<GitRepositoryPullRequest>>
+
 }

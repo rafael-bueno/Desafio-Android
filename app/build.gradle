@@ -58,6 +58,7 @@ dependencies {
     }
 
     implementation deps.circle_imageview
+    implementation deps.fiftyshadesof
 
     //unit test dependencies
     testImplementation deps.request_matcher

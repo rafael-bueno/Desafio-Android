@@ -25,6 +25,7 @@ versions.paging = "1.0.0-alpha4-1"
 versions.glide = "4.4.0"
 versions.constraint_layout = "1.0.2"
 versions.circle_imageview = "2.2.0"
+versions.fiftyshadesof = "1.0.0"
 
 //define o array de dependencias
 def deps = [:]
@@ -80,6 +81,7 @@ deps.mock_web_server = "com.squareup.okhttp3:mockwebserver:$versions.okhttp"
 deps.kappucino = "br.com.concretesolutions:kappuccino:$versions.kappucino"
 deps.junit = "junit:junit:$versions.junit"
 deps.circle_imageview = "de.hdodenhof:circleimageview:$versions.circle_imageview"
+deps.fiftyshadesof = "com.github.florent37:fiftyshadesof:$versions.fiftyshadesof"
 
 ext.deps = deps
 

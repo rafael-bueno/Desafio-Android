@@ -2,7 +2,7 @@ package com.rbueno.desafioandroid.repository
 
 import com.google.gson.annotations.SerializedName
 
-data class GitRepositorySearch(@SerializedName("total_count") val totalItems: Int, @SerializedName("items") val items : List<GitRepository>)
+data class GitRepositorySearch(@SerializedName("total_count") val totalItems: Int, @SerializedName("items") val items: List<GitRepository>)
 
 data class GitRepository(@SerializedName("name") val repositoryName: String,
                          @SerializedName("description") val repositoryDescription: String,
@@ -15,7 +15,8 @@ data class GitRepositoryOwner(@SerializedName("login") val ownerLogin: String,
                               @SerializedName("avatar_url") val avatarUrl: String)
 
 
-data class GitRepositoryPullRequest(@SerializedName("title") val pullRequestTitle: String,
+data class GitRepositoryPullRequest(@SerializedName("id") val id: Int,
+                                    @SerializedName("title") val pullRequestTitle: String,
                                     @SerializedName("body") val pullRequestDescription: String,
                                     @SerializedName("head") val head: GitRepositoryPullRequestHead)
 
