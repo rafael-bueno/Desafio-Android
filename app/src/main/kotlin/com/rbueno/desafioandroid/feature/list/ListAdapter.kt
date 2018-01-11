@@ -1,4 +1,4 @@
-package com.rbueno.desafioandroid.list
+package com.rbueno.desafioandroid.feature.list
 
 import android.arch.paging.PagedListAdapter
 import android.support.v7.recyclerview.extensions.DiffCallback
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.github.florent37.fiftyshadesof.FiftyShadesOf
 import com.rbueno.desafioandroid.R
 import com.rbueno.desafioandroid.repository.GitRepository
 import de.hdodenhof.circleimageview.CircleImageView
@@ -48,16 +49,10 @@ class GitRepositoryHolder(view: View, val callbackHandler: ListAdapterOnItemClic
             itemView.tag = repository.repositoryUserName
             itemView.setOnClickListener(this)
         } else {
-
-            textRepository.text = ""
-            textRepositoryDescription.text =""
-            textRepositoryForks.text = ""
-            textRepositoryStars.text = ""
-
-            /*FiftyShadesOf.with(itemView.context)
+            FiftyShadesOf.with(itemView.context)
                     .on(textRepository, textRepositoryDescription,
                             textRepositoryForks, textRepositoryStars, imageOwner, textOwnerName)
-                    .start()*/
+                    .start()
         }
     }
 
@@ -71,7 +66,7 @@ class GitRepositoryHolder(view: View, val callbackHandler: ListAdapterOnItemClic
 
 object DIFF : DiffCallback<GitRepository>() {
     override fun areItemsTheSame(oldItem: GitRepository, newItem: GitRepository): Boolean {
-        return oldItem.repositoryName.equals(newItem.repositoryName)
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: GitRepository, newItem: GitRepository): Boolean {

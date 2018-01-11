@@ -15,14 +15,14 @@
         tools:replace="android:allowBackup"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".list.ListActivity">
+        <activity android:name=".feature.list.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".pullrequest.PullRequestActivity"/>
+        <activity android:name=".feature.pullrequest.PullRequestActivity"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"

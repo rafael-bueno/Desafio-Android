@@ -1,4 +1,4 @@
-package com.rbueno.desafioandroid.list
+package com.rbueno.desafioandroid.feature.list
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.rbueno.desafioandroid.ListDividerDecoration
 import com.rbueno.desafioandroid.R
-import com.rbueno.desafioandroid.pullrequest.PullRequestActivity
+import com.rbueno.desafioandroid.feature.pullrequest.PullRequestActivity
 import kotlinx.android.synthetic.main.activity_list.*
 
 const val EXTRA_REPO_NAME = "EXTRA_REPO_NAME"

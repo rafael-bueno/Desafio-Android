@@ -1,4 +1,4 @@
-package com.rbueno.desafioandroid.pullrequest
+package com.rbueno.desafioandroid.feature.pullrequest
 
 import android.arch.paging.PagedListAdapter
 import android.support.v7.recyclerview.extensions.DiffCallback

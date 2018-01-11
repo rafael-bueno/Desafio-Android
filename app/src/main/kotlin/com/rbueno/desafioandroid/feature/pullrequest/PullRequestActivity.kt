@@ -1,4 +1,4 @@
-package com.rbueno.desafioandroid.pullrequest
+package com.rbueno.desafioandroid.feature.pullrequest
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -8,7 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearLayoutManager.VERTICAL
 import com.rbueno.desafioandroid.ListDividerDecoration
 import com.rbueno.desafioandroid.R
-import com.rbueno.desafioandroid.list.EXTRA_REPO_NAME
+import com.rbueno.desafioandroid.feature.list.EXTRA_REPO_NAME
 import kotlinx.android.synthetic.main.activity_pull_request.*
 
 class PullRequestActivity : AppCompatActivity() {
@@ -22,8 +22,8 @@ class PullRequestActivity : AppCompatActivity() {
         recyclerPullRequests.addItemDecoration(ListDividerDecoration(this))
         val adapter = PullRequestAdapter()
         recyclerPullRequests.adapter = adapter
-        viewModel = ViewModelProviders.of(this).get(PullRequestActivityViewModel::class.java)
-        viewModel.repositoryName = intent.extras.getString(EXTRA_REPO_NAME)
+        viewModel = ViewModelProviders.of(this,
+                PullRequestActivityViewModelFactory(intent.extras.getString(EXTRA_REPO_NAME))).get(PullRequestActivityViewModel::class.java)
         viewModel.pullRequests.observe(this, Observer { list -> adapter.setList(list) })
     }
 

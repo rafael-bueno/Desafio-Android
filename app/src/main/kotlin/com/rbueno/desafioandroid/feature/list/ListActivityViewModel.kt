@@ -1,4 +1,4 @@
-package com.rbueno.desafioandroid.list
+package com.rbueno.desafioandroid.feature.list
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -38,13 +38,14 @@ class ListActivityDataSource : PageKeyedDataSource<Int, GitRepository>() {
         })
     }
 
+
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, GitRepository>) {
         ApiService.instance.repositoryService().listRepositoryPerPage(params.key, params.requestedLoadSize).enqueue(object : Callback<GitRepositorySearch> {
             override fun onResponse(call: Call<GitRepositorySearch>?, response: Response<GitRepositorySearch>?) {
                 val responseBody = response?.body()
                 val linkHeader = response?.headers()?.toMultimap()?.get("Link")
                 val hasNextPage = linkHeader != null && linkHeader.get(0)?.contains("rel=\"next\"")!!
-                responseBody?.let { rep -> callback.onResult(rep.items, if (hasNextPage!!) params.key + 1 else null) }
+                responseBody?.let { rep -> callback.onResult(rep.items, if (hasNextPage) params.key + 1 else null) }
             }
 
             override fun onFailure(call: Call<GitRepositorySearch>?, t: Throwable?) {

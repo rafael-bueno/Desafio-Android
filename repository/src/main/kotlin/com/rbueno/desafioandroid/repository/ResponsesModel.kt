@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class GitRepositorySearch(@SerializedName("total_count") val totalItems: Int, @SerializedName("items") val items: List<GitRepository>)
 
-data class GitRepository(@SerializedName("name") val repositoryName: String,
+data class GitRepository(@SerializedName("id") val id: Int,
+                         @SerializedName("name") val repositoryName: String,
                          @SerializedName("description") val repositoryDescription: String,
                          @SerializedName("forks_count") val repositoryForksCount: Int,
                          @SerializedName("stargazers_count") val repositoryStarsCount: Int,
