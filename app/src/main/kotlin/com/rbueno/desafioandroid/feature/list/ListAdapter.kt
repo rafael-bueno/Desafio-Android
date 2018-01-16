@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.github.florent37.fiftyshadesof.FiftyShadesOf
+import com.github.ybq.android.spinkit.SpinKitView
 import com.rbueno.desafioandroid.R
-import com.rbueno.desafioandroid.repository.GitRepository
+import com.rbueno.desafioandroid.api.data.GitRepository
 import de.hdodenhof.circleimageview.CircleImageView
 
 class ListAdapter(val callbackHandler: ListAdapterOnItemClickHandler) : PagedListAdapter<GitRepository, GitRepositoryHolder>(DIFF) {
@@ -36,6 +37,9 @@ class GitRepositoryHolder(view: View, val callbackHandler: ListAdapterOnItemClic
     private val textRepositoryStars = view.findViewById<TextView>(R.id.textRepositoryStars)
     private val imageOwner = view.findViewById<CircleImageView>(R.id.imageOwner)
     private val textOwnerName = view.findViewById<TextView>(R.id.textOwnerName)
+    private val spinKit = view.findViewById<SpinKitView>(R.id.spinKit)
+
+    private var shade: FiftyShadesOf? = null
 
     fun bindView(repository: GitRepository?) {
         if (repository != null) {
@@ -48,11 +52,9 @@ class GitRepositoryHolder(view: View, val callbackHandler: ListAdapterOnItemClic
 
             itemView.tag = repository.repositoryUserName
             itemView.setOnClickListener(this)
+            //spinKit.visibility = View.GONE
         } else {
-            FiftyShadesOf.with(itemView.context)
-                    .on(textRepository, textRepositoryDescription,
-                            textRepositoryForks, textRepositoryStars, imageOwner, textOwnerName)
-                    .start()
+            //spinKit.visibility = View.VISIBLE
         }
     }
 

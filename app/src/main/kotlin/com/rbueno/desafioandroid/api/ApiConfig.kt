@@ -1,14 +1,14 @@
-package com.rbueno.desafioandroid.repository
+package com.rbueno.desafioandroid.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ApiService private constructor() {
+class ApiConfig private constructor() {
 
-    private val repositoryService: RepositoryService
+    private val apiService: ApiService
 
     companion object {
-        val instance = ApiService()
+        val instance = ApiConfig()
     }
 
     init {
@@ -19,8 +19,8 @@ class ApiService private constructor() {
                 .build()
 
 
-        repositoryService = retrofit.create(RepositoryService::class.java)
+        apiService = retrofit.create(ApiService::class.java)
     }
 
-    fun repositoryService(): RepositoryService = repositoryService
+    fun apiService(): ApiService = apiService
 }

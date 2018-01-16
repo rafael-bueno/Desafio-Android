@@ -1,4 +1,4 @@
-package com.rbueno.desafioandroid.repository
+package com.rbueno.desafioandroid.api.data
 
 import com.google.gson.annotations.SerializedName
 

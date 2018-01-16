@@ -8,24 +8,22 @@ import android.arch.paging.DataSource
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PageKeyedDataSource
 import android.arch.paging.PagedList
-import com.rbueno.desafioandroid.repository.ApiService
-import com.rbueno.desafioandroid.repository.GitRepositoryPullRequest
+import com.rbueno.desafioandroid.api.data.GitRepositoryPullRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PullRequestActivityViewModel(val repoName: String) : ViewModel() {
+class PullRequestActivityViewModel(repoName: String) : ViewModel() {
 
     val pullRequests: LiveData<PagedList<GitRepositoryPullRequest>> = LivePagedListBuilder(PullRequestDataSourceFactory(repoName),
             PagedList.Config.Builder().setPageSize(10).setInitialLoadSizeHint(10).build()).build()
 
 }
 
-
-class PullRequestDataSource(val repoName: String) : PageKeyedDataSource<Int, GitRepositoryPullRequest>() {
+class PullRequestDataSource(private val repoName: String) : PageKeyedDataSource<Int, GitRepositoryPullRequest>() {
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, GitRepositoryPullRequest>) {
-        ApiService.instance.repositoryService().listPullRequestPerRepo(repoName, params.key, params.requestedLoadSize)
+        fetchLisPullRequest(repoName, params.key, params.requestedLoadSize)
                 .enqueue(object : Callback<List<GitRepositoryPullRequest>> {
                     override fun onResponse(call: Call<List<GitRepositoryPullRequest>>?, response: Response<List<GitRepositoryPullRequest>>?) {
                         val responseBody = response?.body()
@@ -42,8 +40,7 @@ class PullRequestDataSource(val repoName: String) : PageKeyedDataSource<Int, Git
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, GitRepositoryPullRequest>) {}
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, GitRepositoryPullRequest>) {
-
-        ApiService.instance.repositoryService().listPullRequestPerRepo(repoName, 1, params.requestedLoadSize)
+        fetchLisPullRequest(repoName, 1, params.requestedLoadSize)
                 .enqueue(object : Callback<List<GitRepositoryPullRequest>> {
                     override fun onResponse(call: Call<List<GitRepositoryPullRequest>>?, response: Response<List<GitRepositoryPullRequest>>?) {
                         val responseBody = response?.body()
@@ -59,7 +56,7 @@ class PullRequestDataSource(val repoName: String) : PageKeyedDataSource<Int, Git
     }
 }
 
-class PullRequestDataSourceFactory(val repoName: String) : DataSource.Factory<Int, GitRepositoryPullRequest> {
+class PullRequestDataSourceFactory(private val repoName: String) : DataSource.Factory<Int, GitRepositoryPullRequest> {
     private val sourceLiveData = MutableLiveData<PullRequestDataSource>()
 
     override fun create(): DataSource<Int, GitRepositoryPullRequest> {
@@ -69,6 +66,6 @@ class PullRequestDataSourceFactory(val repoName: String) : DataSource.Factory<In
     }
 }
 
-class PullRequestActivityViewModelFactory(val repoName: String) : ViewModelProvider.Factory {
+class PullRequestActivityViewModelFactory(private val repoName: String) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>) = PullRequestActivityViewModel(repoName) as T
 }

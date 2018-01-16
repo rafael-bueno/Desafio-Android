@@ -26,6 +26,7 @@ versions.glide = "4.4.0"
 versions.constraint_layout = "1.0.2"
 versions.circle_imageview = "2.2.0"
 versions.fiftyshadesof = "1.0.0"
+versions.spinkit = "1.1.0"
 
 //define o array de dependencias
 def deps = [:]
@@ -82,6 +83,7 @@ deps.kappucino = "br.com.concretesolutions:kappuccino:$versions.kappucino"
 deps.junit = "junit:junit:$versions.junit"
 deps.circle_imageview = "de.hdodenhof:circleimageview:$versions.circle_imageview"
 deps.fiftyshadesof = "com.github.florent37:fiftyshadesof:$versions.fiftyshadesof"
+deps.spinkit =  "com.github.ybq:Android-SpinKit:$versions.spinkit"
 
 ext.deps = deps
 

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.rbueno.desafioandroid.R
-import com.rbueno.desafioandroid.repository.GitRepositoryPullRequest
+import com.rbueno.desafioandroid.api.data.GitRepositoryPullRequest
 import de.hdodenhof.circleimageview.CircleImageView
 
 class PullRequestAdapter : PagedListAdapter<GitRepositoryPullRequest, GitRepositoryPullRequestHolder>(DIFF) {

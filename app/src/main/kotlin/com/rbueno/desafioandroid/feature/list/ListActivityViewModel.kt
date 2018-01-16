@@ -7,9 +7,8 @@ import android.arch.paging.DataSource
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PageKeyedDataSource
 import android.arch.paging.PagedList
-import com.rbueno.desafioandroid.repository.ApiService
-import com.rbueno.desafioandroid.repository.GitRepository
-import com.rbueno.desafioandroid.repository.GitRepositorySearch
+import com.rbueno.desafioandroid.api.data.GitRepository
+import com.rbueno.desafioandroid.api.data.GitRepositorySearch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,7 +21,7 @@ class ListActivityViewModel : ViewModel() {
 class ListActivityDataSource : PageKeyedDataSource<Int, GitRepository>() {
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, GitRepository>) {
-        ApiService.instance.repositoryService().listRepositoryPerPage(1, params.requestedLoadSize).enqueue(object : Callback<GitRepositorySearch> {
+        fetchRepository(1, params.requestedLoadSize).enqueue(object : Callback<GitRepositorySearch> {
             override fun onResponse(call: Call<GitRepositorySearch>?, response: Response<GitRepositorySearch>?) {
                 if (response?.code() == 200) {
                     val responseBody = response.body()
@@ -40,7 +39,8 @@ class ListActivityDataSource : PageKeyedDataSource<Int, GitRepository>() {
 
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, GitRepository>) {
-        ApiService.instance.repositoryService().listRepositoryPerPage(params.key, params.requestedLoadSize).enqueue(object : Callback<GitRepositorySearch> {
+
+        fetchRepository(params.key, params.requestedLoadSize).enqueue(object : Callback<GitRepositorySearch> {
             override fun onResponse(call: Call<GitRepositorySearch>?, response: Response<GitRepositorySearch>?) {
                 val responseBody = response?.body()
                 val linkHeader = response?.headers()?.toMultimap()?.get("Link")
@@ -51,7 +51,6 @@ class ListActivityDataSource : PageKeyedDataSource<Int, GitRepository>() {
             override fun onFailure(call: Call<GitRepositorySearch>?, t: Throwable?) {
                 TODO("implementar tratamento de erros") //To change body of created functions use File | Settings | File Templates.
             }
-
         })
     }
 

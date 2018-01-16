@@ -33,8 +33,6 @@ android {
 }
 
 dependencies {
-    api project(":repository")
-
     implementation deps.support.recyclerview
     implementation deps.support.appcompat
     implementation deps.support.constraint_layout
@@ -59,6 +57,7 @@ dependencies {
 
     implementation deps.circle_imageview
     implementation deps.fiftyshadesof
+    implementation deps.spinkit
 
     //unit test dependencies
     testImplementation deps.request_matcher
