@@ -76,16 +76,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageOwner"
         tools:text="username" />
-
-    <com.github.ybq.android.spinkit.SpinKitView
-        android:id="@+id/spinKit"
-        style="@style/SpinKitView.Large.ThreeBounce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        app:SpinKit_Color="@color/colorAccent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
 </android.support.constraint.ConstraintLayout>

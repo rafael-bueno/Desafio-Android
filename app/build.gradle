@@ -36,6 +36,7 @@ dependencies {
     implementation deps.support.recyclerview
     implementation deps.support.appcompat
     implementation deps.support.constraint_layout
+    implementation deps.support.design
 
     implementation deps.arch.lifecycle_runtime
     implementation deps.arch.lifecycle_extensions
@@ -56,8 +57,6 @@ dependencies {
     }
 
     implementation deps.circle_imageview
-    implementation deps.fiftyshadesof
-    implementation deps.spinkit
 
     //unit test dependencies
     testImplementation deps.request_matcher

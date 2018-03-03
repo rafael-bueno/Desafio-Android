@@ -8,19 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.github.florent37.fiftyshadesof.FiftyShadesOf
-import com.github.ybq.android.spinkit.SpinKitView
 import com.rbueno.desafioandroid.R
 import com.rbueno.desafioandroid.api.data.GitRepository
 import de.hdodenhof.circleimageview.CircleImageView
 
-class ListAdapter(val callbackHandler: ListAdapterOnItemClickHandler) : PagedListAdapter<GitRepository, GitRepositoryHolder>(DIFF) {
+class ListAdapter(private val callbackHandler: ListAdapterOnItemClickHandler) :
+        PagedListAdapter<GitRepository, GitRepositoryHolder>(DIFF) {
     override fun onBindViewHolder(holder: GitRepositoryHolder?, position: Int) {
         holder?.bindView(getItem(position))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): GitRepositoryHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.view_repository_item, parent, false)
+        val view = LayoutInflater.from(parent?.context).inflate(R.layout.view_repository_item,
+                parent, false)
         return GitRepositoryHolder(view, callbackHandler)
     }
 }
@@ -29,7 +29,8 @@ interface ListAdapterOnItemClickHandler {
     fun onItemClick(repositoryFullName: String)
 }
 
-class GitRepositoryHolder(view: View, val callbackHandler: ListAdapterOnItemClickHandler) : RecyclerView.ViewHolder(view), View.OnClickListener {
+class GitRepositoryHolder(view: View, private val callbackHandler: ListAdapterOnItemClickHandler)
+    : RecyclerView.ViewHolder(view), View.OnClickListener {
 
     private val textRepository = view.findViewById<TextView>(R.id.textRepositoryName)
     private val textRepositoryDescription = view.findViewById<TextView>(R.id.textRepositoryDescription)
@@ -37,9 +38,6 @@ class GitRepositoryHolder(view: View, val callbackHandler: ListAdapterOnItemClic
     private val textRepositoryStars = view.findViewById<TextView>(R.id.textRepositoryStars)
     private val imageOwner = view.findViewById<CircleImageView>(R.id.imageOwner)
     private val textOwnerName = view.findViewById<TextView>(R.id.textOwnerName)
-    private val spinKit = view.findViewById<SpinKitView>(R.id.spinKit)
-
-    private var shade: FiftyShadesOf? = null
 
     fun bindView(repository: GitRepository?) {
         if (repository != null) {
@@ -52,9 +50,6 @@ class GitRepositoryHolder(view: View, val callbackHandler: ListAdapterOnItemClic
 
             itemView.tag = repository.repositoryUserName
             itemView.setOnClickListener(this)
-            //spinKit.visibility = View.GONE
-        } else {
-            //spinKit.visibility = View.VISIBLE
         }
     }
 

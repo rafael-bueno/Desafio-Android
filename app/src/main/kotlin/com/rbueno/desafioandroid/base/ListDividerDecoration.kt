@@ -1,4 +1,4 @@
-package com.rbueno.desafioandroid
+package com.rbueno.desafioandroid.base
 
 import android.content.Context
 import android.graphics.Canvas
@@ -6,6 +6,7 @@ import android.os.Build
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.util.TypedValue.applyDimension
+import com.rbueno.desafioandroid.R
 
 class ListDividerDecoration(val context: Context) : RecyclerView.ItemDecoration() {
 

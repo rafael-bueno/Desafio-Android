@@ -1,4 +1,4 @@
-package com.rbueno.desafioandroid
+package com.rbueno.desafioandroid.base
 
 import android.app.Application
 import com.crashlytics.android.Crashlytics
